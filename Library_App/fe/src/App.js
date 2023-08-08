@@ -2,16 +2,10 @@ import { publicPage } from "./router";
 import DefaultLayout from "./Layout/DefaultLayout";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect ,useState} from "react";
 
 function App() {
 
-  useEffect(()=>{
-    fetch('http://localhost:8081/authors')
-    .then(res => res.json())
-    .then(data => console.log(data))
-    .catch(err => console.log(err))
-  }, [])
 
   return (
     <Fragment >
