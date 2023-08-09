@@ -28,14 +28,14 @@ export default function Author() {
     <div className='container'>
       <div className='row'>
         <div className='py-4'>
-          <Link className='btn btn-primary mb-3' to="/author/create">CREATE NEW AUTHOR</Link>
+          <Link className='btn btn-success mb-3' to="/author/create">CREATE NEW AUTHOR</Link>
           <table className="table border">
             <thead>
               <tr>
-                <th scope="col">#</th>
+                <th scope="col">ID</th>
                   <th scope="col">Name</th>
                 <th scope="col">Nationality</th>
-                <th></th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
