@@ -11,7 +11,7 @@ function Header() {
             <Nav className="me-auto">
               <Link to="/" className={classes.link}>TRANG CHỦ</Link>
               <Link to="/" className={classes.link}>QUẢN LÝ SÁCH</Link>
-              <Link to="/" className={classes.link}>QUẢN LÝ LOẠI SÁCH</Link>
+              <Link to="/book-category" className={classes.link}>QUẢN LÝ LOẠI SÁCH</Link>
               <Link to="/authors" className={classes.link}>QUẢN LÝ TÁC GIẢ</Link>
             </Nav>
             <Nav>
