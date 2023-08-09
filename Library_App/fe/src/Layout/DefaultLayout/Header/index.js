@@ -8,15 +8,15 @@ function Header() {
     <>
       <Navbar bg="light" data-bs-theme="light" style={{height:'50px'}}>
         <Container>
-        <Link to="/" className={classes.link}>Logo</Link>
-          <Nav className="me-auto">
-          <Link to="/" className={classes.link}>About</Link>
-          <Link to="/" className={classes.link}>Contact</Link>
-          
-          </Nav>
-          <Nav>
-          <Link to="/" className={classes.link} >Login</Link>
-          </Nav>
+            <Nav className="me-auto">
+              <Link to="/" className={classes.link}>TRANG CHỦ</Link>
+              <Link to="/" className={classes.link}>QUẢN LÝ SÁCH</Link>
+              <Link to="/" className={classes.link}>QUẢN LÝ LOẠI SÁCH</Link>
+              <Link to="/authors" className={classes.link}>QUẢN LÝ TÁC GIẢ</Link>
+            </Nav>
+            <Nav>
+              <Link to="/" className={classes.link} >ĐĂNG KÝ | ĐĂNG NHẬP</Link>
+            </Nav>
         </Container>
       </Navbar>
     </>
