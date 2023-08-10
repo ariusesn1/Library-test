@@ -1,10 +1,11 @@
 import axios from 'axios';
-import React, { useState } from 'react'
-import { Link, useNavigate} from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react'
+import { Link, useNavigate, useParams} from 'react-router-dom';
 
-export default function CreateBooks() {
+export default function UpdateBooks() {
   let navigate = useNavigate();
 
+  const {id} = useParams();
   const [books, setBooks] = useState({
     title:"",
     category_id:"",
@@ -14,23 +15,40 @@ export default function CreateBooks() {
 
   const{title,category_id,author_id,price} = books;
 
+  const loadBooks = useCallback(async () => {
+    try {
+      const response = await axios.get(`http://localhost:8081/books/${id}`);
+      setBooks(response.data);
+    } catch (error) {
+      console.error('Error loading books:', error);
+    }
+  }, [id]);
+
+  useEffect(() => {
+    loadBooks();
+  }, [loadBooks]);
+
   const onInputChange =(e) => {
     setBooks({...books, [e.target.name]: e.target.value});
   };
 
-  const onSubmit= async (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:8081/books/create", books)
-    navigate("/books")
+    try {
+      await axios.put(`http://localhost:8081/books/update/${id}`, books);
+      navigate("/books");
+    } catch (error) {
+      console.error('Error updating books:', error);
+    }
   };
 
   return (
     <div className='container py-5'>
       <div className='row'>
         <div className='col-md-6 offset-md-3 border rounded p-4 mt-2'>
-          <h2 className='text-center m-4'>CREATE NEW BOOK</h2>
+          <h2 className='text-center m-4'>UPDATE BOOK</h2>
           <form onSubmit={(e) => onSubmit(e)}>
-            <div className='mb-3'>
+          <div className='mb-3'>
               <label htmlFor='name' className='form-label'></label>
               <input 
                 type={"text"} 
@@ -79,7 +97,7 @@ export default function CreateBooks() {
               />
             </div>
             
-            <button type='submit' className='btn btn-outline-primary'>Submit</button>
+            <button type='submit' className='btn btn-outline-primary'>Update</button>
             <Link to='/books' className='btn btn-outline-danger mx-2'>Cancel</Link>
           </form>
         </div>

@@ -6,6 +6,8 @@ import Category from "../Pages/Category/Category";
 import CreateCategory from "../Pages/Category/CreateCategory";
 import UpdateCategory from "../Pages/Category/UpdateCategory";
 import Books from "../Pages/Books/Books";
+import CreateBooks from "../Pages/Books/CreateBooks";
+import UpdateBooks from "../Pages/Books/UpdateBooks";
 const publicPage = [
     {path:"/", component:Home},
     {path:"/authors", component:Authors},
@@ -15,5 +17,7 @@ const publicPage = [
     {path:"/category/create", component:CreateCategory},
     {path:"/category/update/:id", component:UpdateCategory},
     {path:"/books", component:Books},
+    {path:"/books/create", component:CreateBooks},
+    {path:"/books/update/:id", component:UpdateBooks},
 ]
 export {publicPage}

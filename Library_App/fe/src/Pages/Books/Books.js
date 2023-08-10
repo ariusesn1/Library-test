@@ -4,25 +4,11 @@ import {Link} from 'react-router-dom'
 
 export default function Books() {
 
-    const [category, setCategory] = useState([])
-    const [authors, setAuthors] = useState([])
     const [books,setBooks] = useState([])
 
     useEffect(() => {
-       loadCategory()
-       loadAuthors()
        loadBooks()
     }, [])
-
-    const loadCategory= async ()=>{
-      const result =await axios.get("http://localhost:8081/category");
-      setCategory(result.data);
-    }; 
-
-    const loadAuthors= async ()=>{
-      const result =await axios.get("http://localhost:8081/authors");
-      setAuthors(result.data);
-    }; 
 
     const loadBooks= async ()=>{
         const result =await axios.get("http://localhost:8081/books");

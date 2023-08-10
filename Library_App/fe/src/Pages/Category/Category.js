@@ -32,7 +32,7 @@ export default function Category() {
           <table className="table border">
             <thead>
               <tr>
-                <th scope="col">#</th>
+                <th scope="col">ID</th>
                   <th scope="col">Name</th>
                 <th>Action</th>
               </tr>
