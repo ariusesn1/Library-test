@@ -1,4 +1,4 @@
-import { Children, Fragment } from "react";
+import { Fragment } from "react";
 import Header from "./Header";
 
 function DefaultLayout({children}) {
