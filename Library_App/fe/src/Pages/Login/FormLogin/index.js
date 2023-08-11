@@ -7,7 +7,6 @@ function FormLogin(props) {
     const inputPassword = useRef();
     const navigate = useNavigate();
     const handleSubmit = async(e)=>{
-        e.preventDefault();
         const inputUserNameValue = inputUserName.current.value;
         const inputPasswordValue = inputPassword.current.value;
         data.map(item=>{
@@ -24,7 +23,7 @@ function FormLogin(props) {
   return (
     <Fragment>
       <div className={"col-lg-12 col-md-12 " + props.props["form-login"]}>
-        <form
+        <form action="/login" method="post"
           className={"row g-1 col-lg-4 col-md-8 col-sm-12 " + props.props.form}
           onSubmit={handleSubmit}
         >
@@ -59,7 +58,7 @@ function FormLogin(props) {
             />
           </div>
           <div className="mt-3">
-            <button className="btn btn-primary ">Đăng nhập</button>
+            <button className={props.props['button-login']}>Đăng nhập</button>
           </div>
         </form>
       </div>
