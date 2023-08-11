@@ -174,6 +174,19 @@ app.get("/books", (req, res) => {
     })
 })
 
+app.get("/books/sort/:order", (req, res) => {
+    const order = req.params.order === "asc" ? "ASC" : "DESC";
+    const sql = `SELECT * FROM books ORDER BY price ${order}`;
+    
+    db.query(sql, (err, data) => {
+        if (err) {
+            return res.json({ error: err.message });
+        } else {
+            return res.json(data);
+        }
+    });
+});
+
 app.post("/books/create", (req, res) => {
     const sql = "insert into books(title,category_id,author_id,price) values(?)";
     const values = [...Object.values(req.body)];
