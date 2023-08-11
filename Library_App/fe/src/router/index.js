@@ -8,8 +8,10 @@ import UpdateCategory from "../Pages/Category/UpdateCategory";
 import Books from "../Pages/Books/Books";
 import CreateBooks from "../Pages/Books/CreateBooks";
 import UpdateBooks from "../Pages/Books/UpdateBooks";
+import Login from "../Pages/Login";
 const publicPage = [
     {path:"/", component:Home},
+    {path:"/login", component:Login},
     {path:"/authors", component:Authors},
     {path:"/author/create", component:CreateAuthor},
     {path:"/author/update/:id", component:UpdateAuthor},
