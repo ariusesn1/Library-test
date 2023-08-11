@@ -95,7 +95,7 @@ app.put("/author/update/:id", (req, res) => {
 
 //CRUD Category
 app.get("/category", (req, res) => {
-    const sql = "SELECT * FROM categories";
+    const sql = "SELECT * FROM books_categories";
     db.query(sql, (err, data) => {
         if(err) return res.json("Error");
         return res.json(data);
@@ -103,7 +103,7 @@ app.get("/category", (req, res) => {
 })
 
 app.post("/category/create", (req, res) => {
-    const sql = "insert into categories(name) values(?)";
+    const sql = "insert into books_categories(name) values(?)";
     const values = [...Object.values(req.body)];
     console.log("insert", values);
     db.query(sql, [values], (err, data) => {
@@ -115,7 +115,7 @@ app.post("/category/create", (req, res) => {
 
 app.delete("/category/delete/:id", (req, res) => {
     const id = req.params.id;
-    const sql = "DELETE FROM categories WHERE id = ?";
+    const sql = "DELETE FROM books_categories WHERE id = ?";
     
     db.query(sql, [id], (err, data) => {
         if (err) {
@@ -128,7 +128,7 @@ app.delete("/category/delete/:id", (req, res) => {
 
 app.get("/category/:id", (req, res) => {
     const id = req.params.id;
-    const sql = "SELECT * FROM categories WHERE id = ?";
+    const sql = "SELECT * FROM books_categories WHERE id = ?";
     
     db.query(sql, [id], (err, data) => {
         if (err) {
@@ -147,7 +147,7 @@ app.put("/category/update/:id", (req, res) => {
     console.log("updated " + req.body);
     const data = req.body;
     const q =
-      "update categories set " +
+      "update book_categories set " +
       Object.keys(data)
         .map((k) => `${k} = ?`)
         .join(",") +
