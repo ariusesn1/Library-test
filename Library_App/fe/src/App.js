@@ -3,6 +3,7 @@ import DefaultLayout from "./Layout/DefaultLayout";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import { Fragment, useEffect ,useState} from "react";
+import AdminLayout from "./Layout/AdminLayout";
 
 function App() {
 
@@ -14,7 +15,7 @@ function App() {
         <Routes>
           {publicPage.map((router, index) => {
             const Page = router.component;
-            const Layout = router.layout || DefaultLayout;
+            const Layout = router.layout ===true? AdminLayout : DefaultLayout;
             return (
               <Route
                 key={index}

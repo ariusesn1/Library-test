@@ -90,4 +90,13 @@ app.put("/author/update/:id", (req, res) => {
       }
     });
   });   
+  //get data from accounts
+  app.get("/login", (req, res) => {
+    const sql = "SELECT * FROM accounts";
+    db.query(sql, (err, data) => {
+        if(err) return res.json("Error");
+        return res.json(data);
+    })
+})
 
+ 
