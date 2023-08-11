@@ -15,7 +15,7 @@ function Header() {
               <Link to="/authors" className={classes.link}>QUẢN LÝ TÁC GIẢ</Link>
             </Nav>
             <Nav>
-              <Link to="/login" className={classes.link} >ĐĂNG KÝ | ĐĂNG NHẬP</Link>
+              <Link to="/" className={classes.link} >ĐĂNG KÝ | ĐĂNG NHẬP</Link>
             </Nav>
         </Container>
       </Navbar>
