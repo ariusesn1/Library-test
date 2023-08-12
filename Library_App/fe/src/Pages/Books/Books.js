@@ -7,7 +7,8 @@ export default function Books() {
   const [originalBooks, setOriginalBooks] = useState([]);
   const [category, setCategory] = useState([]);
   const [authors, setAuthors] = useState([]);
-  const [sortOrder, setSortOrder] = useState('asc');
+  const [sortOrder, setSortOrder] = useState("asc");
+  const [searchKeyword, setSearchKeyword] = useState("");
 
   useEffect(() => {
     loadBooks();
@@ -44,45 +45,77 @@ export default function Books() {
     setSortOrder(selectedOrder);
 
     try {
-      const result = await axios.get(`http://localhost:8081/books/sort/${selectedOrder}`);
+      const result = await axios.get(
+        `http://localhost:8081/books/sort/${selectedOrder}`
+      );
       setBooks(result.data);
     } catch (error) {
-      console.error('Error sorting books:', error);
+      console.error("Error sorting books:", error);
     }
   };
 
   const handleResetSort = () => {
     setBooks(originalBooks);
-    setSortOrder('asc');
+    setSortOrder("asc");
+  };
+
+  const handleSearch = async () => {
+      const result = await axios.get(`http://localhost:8081/books?keyword=${searchKeyword}`);
+      setBooks(result.data);
   };
   
+  
+
   return (
     <div className="container">
       <div className="row">
         <div className="py-4">
-          <Link className="btn btn-success mb-3" to="/books/create">CREATE NEW BOOK</Link>
-          
+          <Link className="btn btn-success mb-3" to="/books/create">
+            CREATE NEW BOOK
+          </Link>
+
           <div className="col-md-4 d-flex justify-content-end">
             <div class="input-group">
-              <select className='form-select me-2 mb-3' value={sortOrder} onChange={(e) => handleSortChange(e.target.value)}>
-                <option value='asc'>Sort Price (Asc)</option>
-                <option value='desc'>Sort Price (Desc)</option>
+              <select
+                className="form-select me-2 mb-3"
+                value={sortOrder}
+                onChange={(e) => handleSortChange(e.target.value)}
+              >
+                <option value="asc">Sort Price (Asc)</option>
+                <option value="desc">Sort Price (Desc)</option>
               </select>
               <div class="input-group-append">
-                <button type='button' className='btn btn-outline-primary mb-3' onClick={handleResetSort}>Reset Sort</button>
+                <button
+                  type="button"
+                  className="btn btn-outline-primary mb-3"
+                  onClick={handleResetSort}
+                >
+                  Reset Sort
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-6 mb-3">
+            <div className="input-group">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search books by title or author name"
+                value={searchKeyword}
+                onChange={(e) => setSearchKeyword(e.target.value)}
+              />
+              <div class="input-group-append">
+                <button
+                  type="button"
+                  className="btn btn-outline-secondary"
+                  onClick={handleSearch}
+                >
+                  Search
+                </button>
               </div>
             </div>
           </div>
 
-          <div className="col-md-6 mb-3">
-            <div className="input-group">
-              <input type="text" className="form-control" placeholder="Search books by title"/>
-              <div class="input-group-append">
-                <button type="button" className="btn btn-outline-secondary">Search</button>
-              </div>
-            </div>
-          </div>
-          
           <table className="table border">
             <thead>
               <tr>
