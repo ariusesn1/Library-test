@@ -55,8 +55,8 @@ export default function Books() {
   };
 
   const handleResetSort = () => {
-    setBooks(originalBooks);
     setSortOrder("asc");
+    loadBooks();
   };
 
   const handleSearch = async () => {
@@ -70,12 +70,18 @@ export default function Books() {
     <div className="container">
       <div className="row">
         <div className="py-4">
-          <Link className="btn btn-success mb-3" to="/books/create">
+          <Link className="btn btn-success mb-3 me-2" to="/books/create">
             CREATE NEW BOOK
           </Link>
-
+          <button
+                  type="button"
+                  className="btn btn-secondary mb-3"
+                  onClick={handleResetSort}
+                >
+                  Reset 
+                </button>
           <div className="col-md-4 d-flex justify-content-end">
-            <div class="input-group">
+            <div className="input-group">
               <select
                 className="form-select me-2 mb-3"
                 value={sortOrder}
@@ -85,21 +91,14 @@ export default function Books() {
                 <option value="desc">Sort Price (Desc)</option>
               </select>
               <div class="input-group-append">
-                <button
-                  type="button"
-                  className="btn btn-outline-primary mb-3"
-                  onClick={handleResetSort}
-                >
-                  Reset Sort
-                </button>
               </div>
             </div>
           </div>
-          <div className="col-md-6 mb-3">
+          <div className="col-md-4 mb-3">
             <div className="input-group">
               <input
                 type="text"
-                className="form-control"
+                className="form-control me-2 mb-3"
                 placeholder="Search books by title or author name"
                 value={searchKeyword}
                 onChange={(e) => setSearchKeyword(e.target.value)}
