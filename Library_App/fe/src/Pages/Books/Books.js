@@ -60,25 +60,29 @@ export default function Books() {
     <div className="container">
       <div className="row">
         <div className="py-4">
-          <Link className="btn btn-success mb-3" to="/books/create">
-            CREATE NEW BOOK
-          </Link>
-          <button
-              type='button'
-              className='btn btn-secondary mb-3'
-              onClick={handleResetSort}
-            >
-              Reset Sort
-            </button>
-          <select
-              className='form-select me-2 mb-3'
-              value={sortOrder}
-              onChange={(e) => handleSortChange(e.target.value)}
-            >
-              <option value='asc'>Sort Price (Asc)</option>
-              <option value='desc'>Sort Price (Desc)</option>
-            </select>
+          <Link className="btn btn-success mb-3" to="/books/create">CREATE NEW BOOK</Link>
+          
+          <div className="col-md-4 d-flex justify-content-end">
+            <div class="input-group">
+              <select className='form-select me-2 mb-3' value={sortOrder} onChange={(e) => handleSortChange(e.target.value)}>
+                <option value='asc'>Sort Price (Asc)</option>
+                <option value='desc'>Sort Price (Desc)</option>
+              </select>
+              <div class="input-group-append">
+                <button type='button' className='btn btn-outline-primary mb-3' onClick={handleResetSort}>Reset Sort</button>
+              </div>
+            </div>
+          </div>
 
+          <div className="col-md-6 mb-3">
+            <div className="input-group">
+              <input type="text" className="form-control" placeholder="Search books by title"/>
+              <div class="input-group-append">
+                <button type="button" className="btn btn-outline-secondary">Search</button>
+              </div>
+            </div>
+          </div>
+          
           <table className="table border">
             <thead>
               <tr>
