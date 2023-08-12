@@ -147,7 +147,7 @@ app.put("/category/update/:id", (req, res) => {
     console.log("updated " + req.body);
     const data = req.body;
     const q =
-      "update book_categories set " +
+      "update categories set " +
       Object.keys(data)
         .map((k) => `${k} = ?`)
         .join(",") +
