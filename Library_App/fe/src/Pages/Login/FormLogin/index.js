@@ -15,11 +15,11 @@ function FormLogin(props) {
           }
         })
     }
-    useEffect(() => {
-      const data = axios.get("http://localhost:8081/login").then(item=>{
-        setData(item.data)
-      })
-    }, []);
+    // useEffect(() => {
+    //   const data = axios.get("http://localhost:8081/login").then(item=>{
+    //     setData(item.data)
+    //   })
+    // }, []);
   return (
     <Fragment>
       <div className={"col-lg-12 col-md-12 " + props.props["form-login"]}>
