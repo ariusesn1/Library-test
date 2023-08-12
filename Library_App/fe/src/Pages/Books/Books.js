@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 
 export default function Books() {
   const [books, setBooks] = useState([]);
+  const [originalBooks, setOriginalBooks] = useState([]);
   const [category, setCategory] = useState([]);
   const [authors, setAuthors] = useState([]);
+  const [sortOrder, setSortOrder] = useState('asc');
 
   useEffect(() => {
     loadBooks();
@@ -16,6 +18,7 @@ export default function Books() {
   const loadBooks = async () => {
     const result = await axios.get("http://localhost:8081/books");
     setBooks(result.data);
+    setOriginalBooks(result.data);
   };
 
   const loadAuthors = async () => {
@@ -37,6 +40,22 @@ export default function Books() {
     }
   };
 
+  const handleSortChange = async (selectedOrder) => {
+    setSortOrder(selectedOrder);
+
+    try {
+      const result = await axios.get(`http://localhost:8081/books/sort/${selectedOrder}`);
+      setBooks(result.data);
+    } catch (error) {
+      console.error('Error sorting books:', error);
+    }
+  };
+
+  const handleResetSort = () => {
+    setBooks(originalBooks);
+    setSortOrder('asc');
+  };
+  
   return (
     <div className="container">
       <div className="row">
@@ -44,6 +63,22 @@ export default function Books() {
           <Link className="btn btn-success mb-3" to="/books/create">
             CREATE NEW BOOK
           </Link>
+          <button
+              type='button'
+              className='btn btn-secondary mb-3'
+              onClick={handleResetSort}
+            >
+              Reset Sort
+            </button>
+          <select
+              className='form-select me-2 mb-3'
+              value={sortOrder}
+              onChange={(e) => handleSortChange(e.target.value)}
+            >
+              <option value='asc'>Sort Price (Asc)</option>
+              <option value='desc'>Sort Price (Desc)</option>
+            </select>
+
           <table className="table border">
             <thead>
               <tr>
@@ -65,7 +100,7 @@ export default function Books() {
                 );
                 return (
                   <tr key={i}>
-                    <td>{i + 1}</td>
+                    <td>{data.id}</td>
                     <td>{data.title}</td>
                     <td>
                       {categoryObj ? categoryObj.name : "Unknown Category"}

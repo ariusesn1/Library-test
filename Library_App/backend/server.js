@@ -9,7 +9,7 @@ app.use(express.json());
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "123456",
+    password: "12345",
     database: "book_management"
 })
 
@@ -95,7 +95,7 @@ app.put("/author/update/:id", (req, res) => {
 
 //CRUD Category
 app.get("/category", (req, res) => {
-    const sql = "SELECT * FROM book_categories";
+    const sql = "SELECT * FROM categories";
     db.query(sql, (err, data) => {
         if(err) return res.json("Error");
         return res.json(data);
@@ -103,7 +103,7 @@ app.get("/category", (req, res) => {
 })
 
 app.post("/category/create", (req, res) => {
-    const sql = "insert into book_categories(name) values(?)";
+    const sql = "insert into categories(name) values(?)";
     const values = [...Object.values(req.body)];
     console.log("insert", values);
     db.query(sql, [values], (err, data) => {
@@ -115,7 +115,7 @@ app.post("/category/create", (req, res) => {
 
 app.delete("/category/delete/:id", (req, res) => {
     const id = req.params.id;
-    const sql = "DELETE FROM book_categories WHERE id = ?";
+    const sql = "DELETE FROM categories WHERE id = ?";
     
     db.query(sql, [id], (err, data) => {
         if (err) {
@@ -128,7 +128,7 @@ app.delete("/category/delete/:id", (req, res) => {
 
 app.get("/category/:id", (req, res) => {
     const id = req.params.id;
-    const sql = "SELECT * FROM book_categories WHERE id = ?";
+    const sql = "SELECT * FROM categories WHERE id = ?";
     
     db.query(sql, [id], (err, data) => {
         if (err) {
@@ -147,7 +147,7 @@ app.put("/category/update/:id", (req, res) => {
     console.log("updated " + req.body);
     const data = req.body;
     const q =
-      "update book_categories set " +
+      "update categories set " +
       Object.keys(data)
         .map((k) => `${k} = ?`)
         .join(",") +
@@ -173,6 +173,19 @@ app.get("/books", (req, res) => {
         return res.json(data);
     })
 })
+
+app.get("/books/sort/:order", (req, res) => {
+    const order = req.params.order === "asc" ? "ASC" : "DESC";
+    const sql = `SELECT * FROM books ORDER BY price ${order}`;
+    
+    db.query(sql, (err, data) => {
+        if (err) {
+            return res.json({ error: err.message });
+        } else {
+            return res.json(data);
+        }
+    });
+});
 
 app.post("/books/create", (req, res) => {
     const sql = "insert into books(title,category_id,author_id,price) values(?)";
@@ -235,3 +248,5 @@ app.put("/books/update/:id", (req, res) => {
       }
     });
   });   
+
+  
