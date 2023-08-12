@@ -1,0 +1,189 @@
+body{
+
+    background: #eee;
+}
+
+
+.wrapper{
+
+    margin-top: 30px;
+}
+
+.card{
+
+    border:1px solid #eee;
+    cursor: pointer;
+}
+
+
+.weight{
+
+    margin-top: -65px; 
+    transition: all 0.5s;  
+}
+
+.weight small{
+
+    color: #e2dede;
+}
+
+.buttons {
+        padding: 10px;
+    background-color: #d6d4d44f;
+    border-radius: 4px;
+    position: relative;
+    margin-top: 7px;
+    opacity: 0;
+    transition: all 0.8s;
+}
+
+.dot {
+    height: 14px;
+    width: 14px;
+    background-color: green;
+    border-radius: 50%;
+    position: absolute;
+    left: 27%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 8px;
+    color: #fff;
+    opacity: 0;
+}
+
+.cart-button {
+    height: 48px
+}
+
+.cart-button:focus {
+    box-shadow: none
+}
+
+.cart {
+    position: relative;
+    height: 48px !important;
+    width: 50px;
+    margin-right: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    padding: 11px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: 1s ease-in-out;
+    overflow: hidden;
+
+}
+
+.cart-button.clicked span.dot {
+    animation: item 0.3s ease-in forwards
+}
+
+@keyframes item {
+    0% {
+        opacity: 1;
+        top: 30%;
+        left: 30%
+    }
+
+    25% {
+        opacity: 1;
+        left: 26%;
+        top: 0%
+    }
+
+    50% {
+        opacity: 1;
+        left: 23%;
+        top: -22%
+    }
+
+    75% {
+        opacity: 1;
+        left: 19%;
+        top: -18%
+    }
+
+    100% {
+        opacity: 1;
+        left: 14%;
+        top: 28%
+    }
+}
+
+
+
+.card:hover .buttons{
+
+    opacity: 1;
+}
+
+
+.card:hover .weight{
+
+     margin-top: 10px;
+}
+
+.card:hover{
+
+    transform: scale(1.04);
+    z-index: 2;
+    overflow: hidden;
+}
+/* Custom CSS for Carousel */
+.carousel-item {
+    height: 400px; /* Đặt chiều cao của các slide */
+}
+
+.carousel-inner {
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Tùy chỉnh màu sắc, kích thước và hình dạng của các nút điều hướng */
+}
+
+.carousel-control-prev-icon:before,
+.carousel-control-next-icon:before {
+    content: '';
+}
+
+/* Tùy chỉnh màu sắc của các nút điều hướng khi hover */
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.carousel-indicators {
+    bottom: -30px; /* Điều chỉnh vị trí của chỉ số slide */
+}
+
+.carousel-indicators li {
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Tùy chỉnh màu sắc của các chỉ số slide */
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    /* Tùy chỉnh viền của các chỉ số slide */
+}
+
+.carousel-indicators .active {
+    background-color: rgba(0, 0, 0, 0.9);
+    /* Tùy chỉnh màu sắc của chỉ số slide đang hoạt động */
+    border: 1px solid rgba(0, 0, 0, 0.9);
+    /* Tùy chỉnh viền của chỉ số slide đang hoạt động */
+}
+
+/*thẻ a*/
+h1 {
+    text-decoration: underline;
+}

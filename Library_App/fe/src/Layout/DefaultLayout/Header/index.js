@@ -9,7 +9,7 @@ function Header() {
       <Navbar bg="light" data-bs-theme="light" style={{height:'50px'}}>
         <Container>
             <Nav className="me-auto">
-              <Link to="/" className={classes.link}>TRANG CHỦ</Link>
+              <Link to="/Home" className={classes.link}>TRANG CHỦ</Link>
               <Link to="/books" className={classes.link}>QUẢN LÝ SÁCH</Link>
               <Link to="/category" className={classes.link}>QUẢN LÝ LOẠI SÁCH</Link>
               <Link to="/authors" className={classes.link}>QUẢN LÝ TÁC GIẢ</Link>

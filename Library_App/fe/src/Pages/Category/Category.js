@@ -37,8 +37,8 @@ export default function Category() {
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody>
-              {category.map((data, i) => (
+            <tbody >
+              {category?.map((data, i) => (
                 <tr key={i}>
                   <td>{i+1}</td>
                   <td>{data.name}</td>
