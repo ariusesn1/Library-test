@@ -55,6 +55,8 @@ export default function Books() {
                 <th>Action</th>
               </tr>
             </thead>
+     
+            <tbody>
             {books.map((data, i) => {
               const categoryObj = category.find(
                 (cat) => cat.id === data.category_id
@@ -86,30 +88,6 @@ export default function Books() {
                 </tr>
               );
             })}
-            <tbody>
-              {books.map((data, i) => (
-                <tr key={i}>
-                  <td>{i + 1}</td>
-                  <td>{data.title}</td>
-                  <td>{data.category_id}</td>
-                  <td>{data.author_id}</td>
-                  <td>{data.price}</td>
-                  <td>
-                    <Link
-                      to={`/books/update/${data.id}`}
-                      className="btn btn-outline-primary mx-2"
-                    >
-                      Update
-                    </Link>
-                    <button
-                      className="btn btn-outline-danger"
-                      onClick={() => deleteBook(data.id)}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
             </tbody>
           </table>
         </div>
