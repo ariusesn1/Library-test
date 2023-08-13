@@ -9,7 +9,7 @@ app.use(express.json());
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "12345",
+    password: "123456",
     database: "book_management"
 })
 
@@ -248,5 +248,38 @@ app.put("/books/update/:id", (req, res) => {
       }
     });
   });   
-
+  app.get("/login", (req, res) => {
+    const sql = "SELECT * FROM accounts";
+    db.query(sql, (err, data) => {
+        if(err) return res.json("Error");
+        return res.json(data);
+    })
+})
+app.get("/token", (req, res) => {
+    const sql = "SELECT * FROM datatoken";
+    db.query(sql, (err, data) => {
+        if(err) return res.json("Error");
+        return res.json(data);
+    })
+})
+app.post("/token", (req, res) => {
+    const sql = "insert into datatoken(token,timeLife) values(?) ";
+    const values = [...Object.values(req.body)];
+    console.log("insert", values);
+    db.query(sql, [values], (err, data) => {
+      console.log(err, data);
+      if (err) return res.json({ error: err.message });
+      else return res.json({ data });
+    });
+})
+app.delete("/token", (req, res) => {
+    const sql = " delete from datatoken";
+    db.query(sql, (err, data) => {
+        if (err) {
+            return res.json({ error: err.message });
+        } else {
+            return res.json({ message: "Books deleted successfully" });
+        }
+    });
+})
   
