@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 export default function Books() {
   const [books, setBooks] = useState([]);
-  const [originalBooks, setOriginalBooks] = useState([]);
   const [category, setCategory] = useState([]);
   const [authors, setAuthors] = useState([]);
   const [sortOrder, setSortOrder] = useState("asc");
@@ -19,7 +18,6 @@ export default function Books() {
   const loadBooks = async () => {
     const result = await axios.get("http://localhost:8081/books");
     setBooks(result.data);
-    setOriginalBooks(result.data);
   };
 
   const loadAuthors = async () => {
@@ -90,7 +88,7 @@ export default function Books() {
                 <option value="asc">Sort Price (Asc)</option>
                 <option value="desc">Sort Price (Desc)</option>
               </select>
-              <div class="input-group-append">
+              <div className="input-group-append">
               </div>
             </div>
           </div>
@@ -103,7 +101,7 @@ export default function Books() {
                 value={searchKeyword}
                 onChange={(e) => setSearchKeyword(e.target.value)}
               />
-              <div class="input-group-append">
+              <div className="input-group-append">
                 <button
                   type="button"
                   className="btn btn-outline-secondary"
