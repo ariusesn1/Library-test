@@ -166,8 +166,6 @@ app.put("/category/update/:id", (req, res) => {
 // End of CRUD Category
 
 //CRUD Books
-
-
 app.get("/books", async (req, res) => {
     const searchKeyword = req.query.keyword;
     
