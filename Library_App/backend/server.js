@@ -9,7 +9,7 @@ app.use(express.json());
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "123456",
+    password: "12345",
     database: "book_management"
 })
 
@@ -166,13 +166,28 @@ app.put("/category/update/:id", (req, res) => {
 // End of CRUD Category
 
 //CRUD Books
-app.get("/books", (req, res) => {
-    const sql = "SELECT * FROM books";
-    db.query(sql, (err, data) => {
-        if(err) return res.json("Error");
-        return res.json(data);
-    })
-})
+app.get("/books", async (req, res) => {
+    const searchKeyword = req.query.keyword;
+    
+    let sql = `
+      SELECT books.*, authors.name AS author_name
+      FROM books
+      INNER JOIN authors ON books.author_id = authors.id
+    `;
+  
+    if (searchKeyword) {
+      sql += `
+        WHERE books.title LIKE '%${searchKeyword}%' OR authors.name LIKE '%${searchKeyword}%'
+      `;
+    }
+  
+    try {
+      const data = await db.promise().query(sql);
+      return res.json(data[0]);
+    } catch (error) {
+      return res.status(500).json({ error: "Error fetching books" });
+    }
+  });
 
 app.get("/books/sort/:order", (req, res) => {
     const order = req.params.order === "asc" ? "ASC" : "DESC";
