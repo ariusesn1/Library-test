@@ -7,7 +7,6 @@ function FormLogin(props) {
   const [data,setData]=useState([])
     const inputUserName = useRef();
     const inputPassword = useRef();
-    const navigate = useNavigate();
     //submit login
     const handleSubmit = async(e)=>{
       e.preventDefault();
@@ -20,7 +19,7 @@ function FormLogin(props) {
             const expirationTime = new Date().getTime() + 600000; // Token expires in 1 hour
             const token = sha256(`${inputUserNameValue}${expirationTime}`).toString();
             localStorage.setItem("token", token);
-            const putData = await axios.post(
+             await axios.post(
               "http://localhost:8081/token",
               { token: token, timeLife: expirationTime}
             );
