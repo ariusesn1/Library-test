@@ -263,6 +263,8 @@ app.put("/books/update/:id", (req, res) => {
       }
     });
   });   
+
+//Login
   app.get("/login", (req, res) => {
     const sql = "SELECT * FROM accounts";
     db.query(sql, (err, data) => {
