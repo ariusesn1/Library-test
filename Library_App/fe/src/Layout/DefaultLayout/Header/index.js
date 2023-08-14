@@ -30,7 +30,7 @@ function Header() {
     localStorage.removeItem('token')
     setCheckToken(false)
     await axios.delete('http://localhost:8081/token')
-    navigate('/login')
+    window.location.href="/login"
   }
   useEffect(() => {
     checkLogin();

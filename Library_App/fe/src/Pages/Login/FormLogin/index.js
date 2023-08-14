@@ -7,11 +7,14 @@ function FormLogin(props) {
     const inputUserName = useRef();
     const inputPassword = useRef();
     const navigate = useNavigate();
+    //submit login
     const handleSubmit = async(e)=>{
       e.preventDefault();
+      //lây dữ liệu form login
         const inputUserNameValue = inputUserName.current.value;
         const inputPasswordValue = inputPassword.current.value;
         data.map( async item=>{
+          //check data với database
           if(item.username===inputUserNameValue&&item.password===inputPasswordValue){
             const expirationTime = new Date().getTime() + 600000; // Token expires in 1 hour
             const token = sha256(`${inputUserNameValue}${expirationTime}`).toString();
