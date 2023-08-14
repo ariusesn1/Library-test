@@ -24,7 +24,10 @@ function FormLogin(props) {
               "http://localhost:8081/token",
               { token: token, timeLife: expirationTime}
             );
-            window.location.href = '/';
+             props.onLoginSuccess()
+              
+          }else{
+            props.onShow()
           }
         })
     }
