@@ -1,30 +1,42 @@
-import { Fragment, useEffect, useRef, useState } from "react";
-import {useNavigate} from "react-router-dom"
+import { useEffect, useState,useRef,Fragment } from "react";
+import {useNavigate,Link} from "react-router-dom"
+import sha256 from "crypto-js/sha256";
 import axios from "axios"
-
 function FormLogin(props) {
-  const [data,setData]= useState([])
+  const [data,setData]=useState([])
     const inputUserName = useRef();
     const inputPassword = useRef();
     const navigate = useNavigate();
+    //submit login
     const handleSubmit = async(e)=>{
+      e.preventDefault();
+      //lây dữ liệu form login
         const inputUserNameValue = inputUserName.current.value;
         const inputPasswordValue = inputPassword.current.value;
-        data.map(item=>{
+        data.map( async item=>{
+          //check data với database
           if(item.username===inputUserNameValue&&item.password===inputPasswordValue){
-            navigate("/")
+            const expirationTime = new Date().getTime() + 600000; // Token expires in 1 hour
+            const token = sha256(`${inputUserNameValue}${expirationTime}`).toString();
+            localStorage.setItem("token", token);
+            const putData = await axios.post(
+              "http://localhost:8081/token",
+              { token: token, timeLife: expirationTime}
+            );
+            window.location.href = '/';
           }
         })
     }
-    // useEffect(() => {
-    //   const data = axios.get("http://localhost:8081/login").then(item=>{
-    //     setData(item.data)
-    //   })
-    // }, []);
+    useEffect(() => {
+      const data = axios.get("http://localhost:8081/login").then(item=>{
+        setData(item.data)
+      })
+    }, []);
   return (
     <Fragment>
       <div className={"col-lg-12 col-md-12 " + props.props["form-login"]}>
-        <form action="/login" method="post"
+      
+        <form
           className={"row g-1 col-lg-4 col-md-8 col-sm-12 " + props.props.form}
           onSubmit={handleSubmit}
         >
