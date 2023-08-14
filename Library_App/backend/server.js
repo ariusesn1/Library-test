@@ -166,29 +166,13 @@ app.put("/category/update/:id", (req, res) => {
 // End of CRUD Category
 
 //CRUD Books
-app.get("/books", async (req, res) => {
-    const searchKeyword = req.query.keyword;
-    
-    let sql = `
-      SELECT books.*, authors.name AS author_name
-      FROM books
-      INNER JOIN authors ON books.author_id = authors.id
-    `;
-  
-    if (searchKeyword) {
-      sql += `
-        WHERE books.title LIKE '%${searchKeyword}%' OR authors.name LIKE '%${searchKeyword}%'
-      `;
-    }
-  
-    try {
-      const data = await db.promise().query(sql);
-      return res.json(data[0]);
-    } catch (error) {
-      return res.status(500).json({ error: "Error fetching books" });
-    }
-  });
-  
+app.get("/books", (req, res) => {
+    const sql = "SELECT * FROM books";
+    db.query(sql, (err, data) => {
+        if(err) return res.json("Error");
+        return res.json(data);
+    })
+})
 
 app.get("/books/sort/:order", (req, res) => {
     const order = req.params.order === "asc" ? "ASC" : "DESC";
@@ -267,4 +251,39 @@ app.put("/books/update/:id", (req, res) => {
 
 // End of CRUD Books
 
+//Login
+  app.get("/login", (req, res) => {
+    const sql = "SELECT * FROM accounts";
+    db.query(sql, (err, data) => {
+        if(err) return res.json("Error");
+        return res.json(data);
+    })
+})
+app.get("/token", (req, res) => {
+    const sql = "SELECT * FROM datatoken";
+    db.query(sql, (err, data) => {
+        if(err) return res.json("Error");
+        return res.json(data);
+    })
+})
+app.post("/token", (req, res) => {
+    const sql = "insert into datatoken(token,timeLife) values(?) ";
+    const values = [...Object.values(req.body)];
+    console.log("insert", values);
+    db.query(sql, [values], (err, data) => {
+      console.log(err, data);
+      if (err) return res.json({ error: err.message });
+      else return res.json({ data });
+    });
+})
+app.delete("/token", (req, res) => {
+    const sql = " delete from datatoken";
+    db.query(sql, (err, data) => {
+        if (err) {
+            return res.json({ error: err.message });
+        } else {
+            return res.json({ message: "Books deleted successfully" });
+        }
+    });
+})
   

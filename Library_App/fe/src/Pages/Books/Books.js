@@ -72,46 +72,20 @@ export default function Books() {
             CREATE NEW BOOK
           </Link>
           <button
-                  type="button"
-                  className="btn btn-secondary mb-3"
-                  onClick={handleResetSort}
-                >
-                  Reset 
-                </button>
-          <div className="col-md-4 d-flex justify-content-end">
-            <div className="input-group">
-              <select
-                className="form-select me-2 mb-3"
-                value={sortOrder}
-                onChange={(e) => handleSortChange(e.target.value)}
-              >
-                <option value="asc">Sort Price (Asc)</option>
-                <option value="desc">Sort Price (Desc)</option>
-              </select>
-              <div className="input-group-append">
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4 mb-3">
-            <div className="input-group">
-              <input
-                type="text"
-                className="form-control me-2 mb-3"
-                placeholder="Search books by title or author name"
-                value={searchKeyword}
-                onChange={(e) => setSearchKeyword(e.target.value)}
-              />
-              <div className="input-group-append">
-                <button
-                  type="button"
-                  className="btn btn-outline-secondary"
-                  onClick={handleSearch}
-                >
-                  Search
-                </button>
-              </div>
-            </div>
-          </div>
+              type='button'
+              className='btn btn-secondary mb-3'
+              onClick={handleResetSort}
+            >
+              Reset Sort
+            </button>
+          <select
+              className='form-select me-2 mb-3'
+              value={sortOrder}
+              onChange={(e) => handleSortChange(e.target.value)}
+            >
+              <option value='asc'>Sort Price (Asc)</option>
+              <option value='desc'>Sort Price (Desc)</option>
+            </select>
 
           <table className="table border">
             <thead>
